@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Arcade: Sobrevivência de TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Painel Superior de Status -->
+    <div class="hud">
+        <div class="hud-box">
+            <span class="hud-label">⭐ PONTUAÇÃO</span>
+            <span class="hud-val" id="score">0</span>
+        </div>
+        <div class="hud-box">
+            <span class="hud-label">🔥 MULTIPLICADOR</span>
+            <span class="hud-val" id="multiplier">x1</span>
+        </div>
+        <div class="hud-box">
+            <span class="hud-label">🏆 RECORDE DA MÁQUINA</span>
+            <span class="hud-val" id="high-score">0</span>
+        </div>
+    </div>
+
+    <!-- Barra de Estabilidade do PC (Vida) -->
+    <div class="stability-section">
+        <div class="stability-text">Estabilidade do Sistema: <span id="stability-val">100%</span></div>
+        <div class="stability-container">
+            <div class="stability-bar" id="stabilityBar"></div>
+        </div>
+    </div>
+
+    <!-- Monitor Central de Alertas Críticos -->
+    <div class="alert-monitor" id="alertMonitor">
+                <div id="start-screen">
+            <h2>🖥️ ARENA HARDWARE: OPERAÇÃO SOBREVIVÊNCIA</h2>
+            <p>O computador está ligando e vai começar a apresentar falhas de hardware reais.</p>
+            <p><strong>Sua missão:</strong> Selecione seu nível e clique no componente correto para consertar o problema antes da Tela Azul!</p>
+            
+            <!-- Seleção de Nível Profissional -->
+            <div class="level-selector">
+                <label for="difficultySelect">👨‍💻 NÍVEL DE TI:</label>
+                <select id="difficultySelect">
+                    <option value="junior">🌱 JÚNIOR (Mais tempo para pensar)</option>
+                    <option value="pleno" selected>⚡ PLENO (Equilibrado e dinâmico)</option>
+                    <option value="senior">🔥 SÊNIOR (Rápido e implacável)</option>
+                </select>
+            </div>
+
+            <button class="btn-action" onclick="startGame()">INICIAR SISTEMA (START)</button>
+        </div>
+
+        <div id="game-screen" style="display: none;">
+            <div class="warning-title">⚠️ ALERTA DO SISTEMA</div>
+            <div class="warning-desc" id="current-problem">Aguardando falha...</div>
+        </div>
+    </div>
+
+    <!-- Painel de Seleção de Hardware -->
+    <div class="hardware-grid" id="hardwareGrid">
+        <!-- Inserido dinamicamente via JS -->
+    </div>
+</div>
+
+<!-- Tela de Game Over / Tela Azul -->
+<div class="bsod" id="bsodScreen">
+    <div class="bsod-content">
+        <h1>:(</h1>
+        <h2>Ocorreu um problema e o seu PC precisou ser reiniciado.</h2>
+        <p>O sistema colapsou devido a falhas críticas de hardware mal gerenciadas.</p>
+        
+        <div class="results-box">
+            <p>Pontuação Final: <span id="final-score" style="font-weight: bold; color: #fff;">0</span></p>
+            <p>Problemas Resolvidos: <span id="final-resolved" style="font-weight: bold; color: #fff;">0</span></p>
+            <p class="validation-code">Código de Validação para o Professor: <span id="auth-code">---</span></p>
+        </div>
+
+        <button class="btn-restart" onclick="location.reload()">TENTAR NOVAMENTE</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+:root {
+    --bg-dark: #05050a;
+    --hud-bg: #10101e;
+    --neon-blue: #00f0ff;
+    --neon-green: #39ff14;
+    --neon-red: #ff3131;
+    --text-main: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Courier, monospace;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Seletor de Níveis */
+.level-selector {
+    margin: 20px 0;
+    font-size: 1.1rem;
+}
+
+.level-selector label {
+    margin-right: 10px;
+    color: #8888b0;
+    font-weight: bold;
+}
+
+.level-selector select {
+    background: #10101e;
+    color: var(--neon-blue);
+    border: 1px solid #252545;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.level-selector select:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+
+.game-container {
+    max-width: 900px;
+    width: 100%;
+    background: #0b0b14;
+    border: 2px solid #1e1e38;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+}
+
+/* HUD Superior */
+.hud {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.hud-box {
+    background: var(--hud-bg);
+    border: 1px solid #222244;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.hud-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #8888b0;
+    letter-spacing: 1px;
+}
+
+.hud-val {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--neon-blue);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* Barra de Estabilidade */
+.stability-section {
+    margin-bottom: 25px;
+}
+
+.stability-text {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stability-container {
+    width: 100%;
+    background: #151525;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #252545;
+}
+
+.stability-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-green), #00ff88);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    transition: width 0.1s linear, background-color 0.3s;
+}
+
+/* Tela de Alertas Centrais */
+.alert-monitor {
+    background: #020205;
+    border: 2px dashed #ff3131;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 25px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-monitor.active-alert {
+    background: #1a0505;
+    animation: pulse-border 1s infinite alternate;
+}
+
+.warning-title {
+    color: var(--neon-red);
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.warning-desc {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Grid de Componentes */
+.hardware-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.hw-card {
+    background: #121225;
+    border: 1px solid #252545;
+    border-radius: 8px;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 1.05rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.15s ease;
+}
+
+.hw-card:hover {
+    background: #1a1a3a;
+    border-color: var(--neon-blue);
+    transform: scale(1.02);
+}
+
+.hw-card:active {
+    transform: scale(0.98);
+}
+
+.btn-action {
+    background: var(--neon-blue);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Tela Azul (BSOD) */
+.bsod {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #0078d7;
+    color: #fff;
+    z-index: 9999;
+    padding: 10% 5%;
+    box-sizing: border-box;
+}
+
+.bsod-content {
+    max-width: 800px;
+}
+
+.bsod h1 { font-size: 6rem; margin: 0; }
+.bsod h2 { font-size: 2rem; font-weight: 300; margin: 20px 0; }
+
+.results-box {
+    background: rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 25px 0;
+    font-size: 1.2rem;
+}
+
+.validation-code {
+    font-size: 0.9rem;
+    color: #b0d8ff;
+    border-top: 1px dashed rgba(255,255,255,0.3);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.btn-restart {
+    background: #fff;
+    color: #0078d7;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@keyframes pulse-border {
+    from { border-color: #ff3131; box-shadow: 0 0 5px rgba(255,49,49,0.2); }
+    to { border-color: #ff9999; box-shadow: 0 0 20px rgba(255,49,49,0.6); }
+}
