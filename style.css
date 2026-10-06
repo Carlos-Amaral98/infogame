@@ -1,15 +1,19 @@
 :root {
-    --bg-dark: #05050a;
-    --hud-bg: #10101e;
-    --neon-blue: #00f0ff;
-    --neon-green: #39ff14;
-    --neon-red: #ff3131;
-    --text-main: #e2e8f0;
+    --bg-light: #f4f6fb;
+    --card-bg: #ffffff;
+    --hud-bg: #eef1f8;
+    --border-soft: #e1e5f0;
+    --accent-blue: #2563eb;
+    --accent-green: #16a34a;
+    --accent-red: #dc2626;
+    --accent-orange: #f59e0b;
+    --text-main: #1e2433;
+    --text-muted: #6b7280;
 }
 
 body {
-    font-family: 'Segoe UI', Courier, monospace;
-    background-color: var(--bg-dark);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #eef2fb 0%, #e4e9f7 100%);
     color: var(--text-main);
     margin: 0;
     padding: 10px;
@@ -28,36 +32,167 @@ body {
 
 .level-selector label {
     margin-right: 10px;
-    color: #8888b0;
+    color: var(--text-muted);
     font-weight: bold;
 }
 
 .level-selector select {
-    background: #10101e;
-    color: var(--neon-blue);
-    border: 1px solid #252545;
+    background: #ffffff;
+    color: var(--accent-blue);
+    border: 1px solid var(--border-soft);
     padding: 8px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     font-family: inherit;
     cursor: pointer;
     outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.level-selector select:focus {
-    border-color: var(--neon-blue);
-    box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+.level-selector select:focus,
+.level-selector select:hover {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+/* Seletor de Modo (Solo / Duelo) */
+.mode-selector {
+    margin: 10px 0 0;
+    font-size: 1.1rem;
+}
+
+.mode-selector label {
+    margin-right: 10px;
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
+.mode-selector select {
+    background: #ffffff;
+    color: #9333ea;
+    border: 1px solid var(--border-soft);
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mode-selector select:focus,
+.mode-selector select:hover {
+    border-color: #9333ea;
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
+}
+
+/* HUD do Duelo */
+.duel-hud .player1 .hud-val { color: var(--accent-blue); }
+.duel-hud .player2 .hud-val { color: #9333ea; }
+
+.duel-stability {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.duel-stability .stability-section {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.duel-instructions {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: -10px 0 20px;
+    font-weight: 600;
+}
+
+/* Streak */
+.streak-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+}
+
+.streak-badge.pop {
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Bônus especiais */
+.alert-monitor.powerup-alert {
+    border-color: var(--accent-orange);
+    background: #fff8e8;
+    animation: pulse-border-powerup 1s infinite alternate;
+}
+
+@keyframes pulse-border-powerup {
+    from { border-color: var(--accent-orange); box-shadow: 0 0 5px rgba(245, 158, 11, 0.15); }
+    to { border-color: #fbbf24; box-shadow: 0 0 18px rgba(245, 158, 11, 0.35); }
+}
+
+/* Shake de erro */
+@keyframes shake {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(4px); }
+    30%, 50%, 70% { transform: translateX(-8px); }
+    40%, 60% { transform: translateX(8px); }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* Animação de troca de problema */
+.fade-in-problem {
+    animation: fade-in-problem 0.25s ease;
+}
+
+@keyframes fade-in-problem {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Badge de tecla no modo Duelo */
+.hw-card {
+    position: relative;
+}
+
+.key-badge {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    background: var(--accent-blue);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .game-container {
     max-width: 900px;
     width: 100%;
-    background: #0b0b14;
-    border: 2px solid #1e1e38;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 35px rgba(30, 41, 59, 0.08);
 }
 
 /* HUD Superior */
@@ -70,24 +205,29 @@ body {
 
 .hud-box {
     background: var(--hud-bg);
-    border: 1px solid #222244;
-    padding: 10px;
-    border-radius: 6px;
+    border: 1px solid var(--border-soft);
+    padding: 12px;
+    border-radius: 10px;
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hud-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 41, 59, 0.08);
 }
 
 .hud-label {
     display: block;
     font-size: 0.75rem;
-    color: #8888b0;
+    color: var(--text-muted);
     letter-spacing: 1px;
 }
 
 .hud-val {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--neon-blue);
-    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--accent-blue);
 }
 
 /* Barra de Estabilidade */
@@ -100,30 +240,31 @@ body {
     margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
+    font-weight: 600;
+    color: var(--text-muted);
 }
 
 .stability-container {
     width: 100%;
-    background: #151525;
+    background: var(--hud-bg);
     height: 20px;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid #252545;
+    border: 1px solid var(--border-soft);
 }
 
 .stability-bar {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, var(--neon-green), #00ff88);
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    background: linear-gradient(90deg, var(--accent-green), #22c55e);
     transition: width 0.1s linear, background-color 0.3s;
 }
 
 /* Tela de Alertas Centrais */
 .alert-monitor {
-    background: #020205;
-    border: 2px dashed #ff3131;
-    border-radius: 8px;
+    background: #fff5f5;
+    border: 2px dashed var(--accent-red);
+    border-radius: 12px;
     padding: 30px;
     text-align: center;
     margin-bottom: 25px;
@@ -132,16 +273,17 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 .alert-monitor.active-alert {
-    background: #1a0505;
+    background: #ffecec;
     animation: pulse-border 1s infinite alternate;
 }
 
 .warning-title {
-    color: var(--neon-red);
-    font-weight: bold;
+    color: var(--accent-red);
+    font-weight: 800;
     font-size: 1.2rem;
     letter-spacing: 2px;
 }
@@ -149,7 +291,8 @@ body {
 .warning-desc {
     font-size: 1.4rem;
     margin-top: 10px;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--text-main);
 }
 
 /* Grid de Componentes */
@@ -160,40 +303,53 @@ body {
 }
 
 .hw-card {
-    background: #121225;
-    border: 1px solid #252545;
-    border-radius: 8px;
+    background: var(--hud-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
     padding: 20px 10px;
     text-align: center;
     font-size: 1.05rem;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    color: var(--text-main);
     transition: all 0.15s ease;
 }
 
 .hw-card:hover {
-    background: #1a1a3a;
-    border-color: var(--neon-blue);
-    transform: scale(1.02);
+    background: #ffffff;
+    border-color: var(--accent-blue);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.15);
+    transform: translateY(-3px);
 }
 
 .hw-card:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 .btn-action {
-    background: var(--neon-blue);
-    color: #000;
+    background: var(--accent-blue);
+    color: #fff;
     border: none;
     padding: 12px 30px;
     font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
+    font-weight: 700;
+    border-radius: 8px;
     cursor: pointer;
     margin-top: 15px;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Tela Azul (BSOD) */
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+}
+
+/* Tela Azul (BSOD) — mantida como referência ao Windows, propositalmente escura */
 .bsod {
     display: none;
     position: fixed;
@@ -215,17 +371,9 @@ body {
 .results-box {
     background: rgba(0,0,0,0.2);
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 8px;
     margin: 25px 0;
     font-size: 1.2rem;
-}
-
-.validation-code {
-    font-size: 0.9rem;
-    color: #b0d8ff;
-    border-top: 1px dashed rgba(255,255,255,0.3);
-    padding-top: 10px;
-    margin-top: 10px;
 }
 
 .btn-restart {
@@ -235,11 +383,16 @@ body {
     padding: 12px 30px;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.btn-restart:hover {
+    transform: translateY(-2px);
 }
 
 @keyframes pulse-border {
-    from { border-color: #ff3131; box-shadow: 0 0 5px rgba(255,49,49,0.2); }
-    to { border-color: #ff9999; box-shadow: 0 0 20px rgba(255,49,49,0.6); }
+    from { border-color: var(--accent-red); box-shadow: 0 0 5px rgba(220,38,38,0.15); }
+    to { border-color: #f87171; box-shadow: 0 0 18px rgba(220,38,38,0.3); }
 }

@@ -9,8 +9,8 @@
 <body>
 
 <div class="game-container">
-    <!-- Painel Superior de Status -->
-    <div class="hud">
+    <!-- Painel Superior de Status (Solo) -->
+    <div class="hud" id="soloHud">
         <div class="hud-box">
             <span class="hud-label">⭐ PONTUAÇÃO</span>
             <span class="hud-val" id="score">0</span>
@@ -25,21 +25,71 @@
         </div>
     </div>
 
-    <!-- Barra de Estabilidade do PC (Vida) -->
-    <div class="stability-section">
+    <!-- Painel Superior de Status (Duelo) -->
+    <div class="hud duel-hud" id="duelHud" style="display:none;">
+        <div class="hud-box player1">
+            <span class="hud-label">🖱️ JOGADOR 1</span>
+            <span class="hud-val" id="p1-score">0</span>
+        </div>
+        <div class="hud-box">
+            <span class="hud-label">⚔️ MODO</span>
+            <span class="hud-val" style="font-size:1rem;">ELIMINAÇÃO</span>
+        </div>
+        <div class="hud-box player2">
+            <span class="hud-label">⌨️ JOGADOR 2</span>
+            <span class="hud-val" id="p2-score">0</span>
+        </div>
+    </div>
+
+    <div id="streakDisplay" class="streak-badge" style="display:none;"></div>
+
+    <!-- Barra de Estabilidade do PC (Vida) — Solo -->
+    <div class="stability-section" id="soloStabilitySection">
         <div class="stability-text">Estabilidade do Sistema: <span id="stability-val">100%</span></div>
         <div class="stability-container">
             <div class="stability-bar" id="stabilityBar"></div>
         </div>
     </div>
 
+    <!-- Barras de Estabilidade — Duelo -->
+    <div class="duel-stability" id="duelStabilitySection" style="display:none;">
+        <div class="stability-section">
+            <div class="stability-text">🖱️ Jogador 1: <span id="p1-stability-val">100%</span></div>
+            <div class="stability-container">
+                <div class="stability-bar" id="p1StabilityBar"></div>
+            </div>
+        </div>
+        <div class="stability-section">
+            <div class="stability-text">⌨️ Jogador 2: <span id="p2-stability-val">100%</span></div>
+            <div class="stability-container">
+                <div class="stability-bar" id="p2StabilityBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="duelInstructions" class="duel-instructions" style="display:none;">
+        🖱️ Jogador 1 clica nos componentes · ⌨️ Jogador 2 usa as teclas 1 a 8
+    </div>
+
     <!-- Monitor Central de Alertas Críticos -->
     <div class="alert-monitor" id="alertMonitor">
-                <div id="start-screen">
+        <div id="start-screen">
             <h2>🖥️ ARENA HARDWARE: OPERAÇÃO SOBREVIVÊNCIA</h2>
             <p>O computador está ligando e vai começar a apresentar falhas de hardware reais.</p>
-            <p><strong>Sua missão:</strong> Selecione seu nível e clique no componente correto para consertar o problema antes da Tela Azul!</p>
-            
+            <p><strong>Sua missão:</strong> Selecione seu modo e nível, e clique no componente correto para consertar o problema antes da Tela Azul!</p>
+
+            <!-- Seleção de Modo -->
+            <div class="mode-selector">
+                <label for="modeSelect">🎮 MODO DE JOGO:</label>
+                <select id="modeSelect">
+                    <option value="solo" selected>👤 SOLO</option>
+                    <option value="duel">⚔️ DUELO 1v1 (mesmo PC)</option>
+                </select>
+            </div>
+            <div id="duelInfo" style="display:none; margin: 4px 0 10px; font-size: 0.85rem; color: #6b7280;">
+                🖱️ Jogador 1 usa o mouse (clique nos componentes) · ⌨️ Jogador 2 usa o teclado (teclas 1 a 8)
+            </div>
+
             <!-- Seleção de Nível Profissional -->
             <div class="level-selector">
                 <label for="difficultySelect">👨‍💻 NÍVEL DE TI:</label>
@@ -69,13 +119,12 @@
 <div class="bsod" id="bsodScreen">
     <div class="bsod-content">
         <h1>:(</h1>
-        <h2>Ocorreu um problema e o seu PC precisou ser reiniciado.</h2>
+        <h2 id="bsod-title">Ocorreu um problema e o seu PC precisou ser reiniciado.</h2>
         <p>O sistema colapsou devido a falhas críticas de hardware mal gerenciadas.</p>
-        
+
         <div class="results-box">
-            <p>Pontuação Final: <span id="final-score" style="font-weight: bold; color: #fff;">0</span></p>
-            <p>Problemas Resolvidos: <span id="final-resolved" style="font-weight: bold; color: #fff;">0</span></p>
-            <p class="validation-code">Código de Validação para o Professor: <span id="auth-code">---</span></p>
+            <p><span id="result-label-1">Pontuação Final:</span> <span id="final-score" style="font-weight: bold; color: #fff;">0</span></p>
+            <p><span id="result-label-2">Problemas Resolvidos:</span> <span id="final-resolved" style="font-weight: bold; color: #fff;">0</span></p>
         </div>
 
         <button class="btn-restart" onclick="location.reload()">TENTAR NOVAMENTE</button>
